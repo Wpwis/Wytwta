@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker Animation</title>
+    <style>
+        /* Temel stil ayarları */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            font-family: 'Courier New', monospace;
+            color: #00FF00;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        /* Hacker Konsolu animasyonu */
+        .console {
+            background-color: black;
+            width: 80%;
+            height: 60%;
+            padding: 20px;
+            border: 1px solid #00FF00;
+            font-size: 1.5rem;
+            line-height: 2;
+            color: #00FF00;
+            overflow-y: auto;
+            white-space: nowrap;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            animation: blink 1s infinite step-start;
+        }
+
+        /* Yazı animasyonu */
+        .console-text {
+            display: inline;
+            animation: typing 2s steps(30) 1s forwards, blink-caret 0.75s step-end infinite;
+        }
+
+        /* typing animation */
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        /* Caret (cursor) animasyonu */
+        @keyframes blink-caret {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        /* Konsolda yapılacak yazı animasyonu */
+        .console-code {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            animation: typing 3s steps(40) infinite;
+            white-space: nowrap;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        /* Random Code Animation */
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hacker Konsolu -->
+    <div class="console">
+        <div class="console-text">
+            <span class="console-code">Initializing system... </span>
+            <span class="console-code">System check complete. </span>
+            <span class="console-code">User access granted. </span>
+            <span class="console-code">Scanning... </span>
+            <span class="console-code">Hacking in progress... </span>
+            <span class="console-code">Code injected! </span>
+            <span class="console-code">Exfiltrating data... </span>
+            <span class="console-code">Connection successful. </span>
+            <span class="console-code">Decrypting password... </span>
+            <span class="console-code">Data exfiltration complete. </span>
+            <span class="console-code">Logout...</span>
+        </div>
+    </div>
+
+    <script>
+        // Basit random kod animasyonu için ekleme
+        const codes = [
+            'Command not recognized',
+            'Access denied',
+            'User disconnected',
+            'Connection timed out',
+            'Attempting to break encryption...',
+            'Bypassing firewall...',
+            'Opening backdoor...',
+            'Downloading key...',
+            'Network breach detected!',
+            'Malware inserted successfully.'
+        ];
+
+        let consoleDiv = document.querySelector('.console');
+
+        function randomCode() {
+            let randomIndex = Math.floor(Math.random() * codes.length);
+            let randomText = codes[randomIndex];
+            let codeSpan = document.createElement('span');
+            codeSpan.classList.add('console-code');
+            codeSpan.textContent = randomText;
+            consoleDiv.appendChild(codeSpan);
+        }
+
+        // Her 5 saniyede bir yeni random kod ekle
+        setInterval(randomCode, 5000);
+    </script>
+</body>
+</html>
