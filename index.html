@@ -2,61 +2,108 @@
 <html lang="az">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AZN Coin Airdrop</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(45deg, #1a1a1d, #4e4e50);
+            background: linear-gradient(to bottom right, #141E30, #243B55);
             font-family: 'Poppins', sans-serif;
-            color: #fff;
             margin: 0;
             padding: 0;
+            color: white;
             text-align: center;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         h1 {
             font-size: 2.5rem;
-            margin: 20px 0;
+            margin-top: 20px;
             color: #FFD700;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
 
-        #coin-balance {
+        .balance {
             font-size: 1.5rem;
-            margin: 10px 0;
+            margin: 20px 0;
             padding: 10px 20px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             display: inline-block;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
-        #username {
-            margin-bottom: 20px;
-            padding: 10px;
-            font-size: 1.2rem;
-            border-radius: 5px;
-            border: none;
+        .task-list {
+            text-align: left;
+            margin: 20px auto;
+            padding: 20px;
             width: 80%;
-            max-width: 400px;
-            outline: none;
-        }
-
-        button {
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            margin: 20px 10px;
-            background-color: #FFD700;
-            border: none;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
-            color: #1a1a1d;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
-        button:hover {
-            background-color: #FFC107;
+        .task-item {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .task-item button {
+            padding: 5px 10px;
+            font-size: 1rem;
+            background: #FFD700;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .referral-section {
+            margin: 20px auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .referral-link {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            color: #FFD700;
+            word-wrap: break-word;
+        }
+
+        .animation-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .coin {
+            position: absolute;
+            font-size: 2rem;
+            animation: fly 2s ease-out forwards;
+            color: #FFD700;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-200px);
+                opacity: 0;
+            }
         }
 
         .menu {
@@ -67,99 +114,67 @@
         }
 
         .menu-item {
-            background: rgba(255, 255, 255, 0.1);
             padding: 10px 20px;
-            border-radius: 5px;
-            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            font-size: 1rem;
+            color: white;
         }
 
         .menu-item:hover {
             background: rgba(255, 255, 255, 0.2);
         }
-
-        .menu-item span {
-            display: block;
-            margin-top: 5px;
-        }
-
-        .animation-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .coin {
-            position: absolute;
-            font-size: 1.5rem;
-            color: #FFD700;
-            animation: fly 2s ease-in-out forwards;
-        }
-
-        @keyframes fly {
-            0% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-300px) rotate(360deg);
-                opacity: 0;
-            }
-        }
     </style>
 </head>
 <body>
     <h1>AZN Coin Airdrop</h1>
-    <p id="coin-balance">Balans: <span id="balance">0</span> AZN</p>
-    <input type="text" id="username" placeholder="İstifadəçi adınızı daxil edin">
-    <button onclick="collectCoin()">Coin Topla</button>
-    <div class="menu">
-        <div class="menu-item" onclick="showTasks()">
-            <span>Tapşırıqlar</span>
+    <p class="balance">Balans: <span id="balance">0</span> AZN</p>
+
+    <div class="task-list">
+        <h2>Tapşırıqlar:</h2>
+        <div class="task-item">
+            Telegram kanala qoşul
+            <button onclick="completeTask(5)">Tamamla</button>
         </div>
-        <div class="menu-item" onclick="showWithdraw()">
-            <span>Çıxarış</span>
+        <div class="task-item">
+            Tweet paylaş
+            <button onclick="completeTask(10)">Tamamla</button>
         </div>
-        <div class="menu-item" onclick="showLeaderboard()">
-            <span>Liderlər</span>
+        <div class="task-item">
+            Dost dəvət et
+            <button onclick="completeTask(15)">Tamamla</button>
         </div>
     </div>
+
+    <div class="referral-section">
+        <h2>Referal Sistemi:</h2>
+        <p>Referal Linkiniz:</p>
+        <div class="referral-link">
+            https://t.me/yourbot?start=ref123
+        </div>
+    </div>
+
     <div class="animation-container" id="animation-container"></div>
 
     <script>
         let balance = 0;
 
-        function collectCoin() {
+        function completeTask(points) {
             const animationContainer = document.getElementById('animation-container');
             const coin = document.createElement('div');
             coin.className = 'coin';
+            coin.textContent = '💰';
             coin.style.left = `${Math.random() * 100}%`;
             coin.style.top = `${Math.random() * 100}%`;
-            coin.textContent = '💰';
             animationContainer.appendChild(coin);
 
-            balance++;
+            balance += points;
             document.getElementById('balance').textContent = balance;
 
             setTimeout(() => {
                 animationContainer.removeChild(coin);
             }, 2000);
-        }
-
-        function showTasks() {
-            alert('Tapşırıqlar bölməsi yaxın zamanda əlavə ediləcək!');
-        }
-
-        function showWithdraw() {
-            alert('Çıxarış sistemi aktivdir!');
-        }
-
-        function showLeaderboard() {
-            alert('Liderlər lövhəsi tezliklə yenilənəcək!');
         }
     </script>
 </body>
